@@ -1,0 +1,19 @@
+/* Global ================================== */
+* {
+  background: rgb(175, 171, 171);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Header ================================== */
+header {
+  text-align: center;
+  padding: 6rem;
+  font-size: 2.5rem;
+}
+
+/* Time ================================== */
+#time {
+  text-align: center;
+}
+
+/* Footer ================================== */
