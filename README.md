@@ -1,3 +1,3 @@
-<h1 align="center">Timer</h1>
+<h1 align="center">Timer ⏰</h1>
 
-This repository contains a website that tracks your time. ⏰
+This repository contains a website that tracks your time.

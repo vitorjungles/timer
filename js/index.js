@@ -1,2 +1,3 @@
-var a = document.getElementById("year")
-console.log(a)
+var a = new Date;
+a = a.getFullYear();
+document.getElementById("year").innerHTML = a;
