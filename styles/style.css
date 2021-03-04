@@ -12,8 +12,24 @@ header {
 }
 
 /* Time ================================== */
-#time {
+#time-section {
   text-align: center;
+}
+
+#time {
+  padding: 5rem;
+  font-size: 50px;
+  border-radius: 1.5rem;
+}
+
+#inicial {
+  margin-top: 50px;
+  border-radius: 2rem;
+  padding: 2rem;
+}
+
+#inicial:hover {
+  margin-top: 45px;
 }
 
 /* Footer ================================== */
