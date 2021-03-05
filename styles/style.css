@@ -11,7 +11,7 @@ header {
   font-size: 2.5rem;
 }
 
-/* Time ================================== */
+/* Time-section ================================== */
 #time-section {
   text-align: center;
 }
@@ -26,10 +26,24 @@ header {
   margin-top: 50px;
   border-radius: 2rem;
   padding: 2rem;
+  font-size: 30px;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 6rem;
 }
 
 #inicial:hover {
   margin-top: 45px;
+  margin-bottom: 6.3rem;
+}
+
+/* History-section ================================== */
+#history-section {
+  text-align: center;
+}
+
+#finalized {
+  padding-top: 500px;
+  color: red;
 }
 
 /* Footer ================================== */
