@@ -1,6 +1,6 @@
 /* Global ================================== */
 * {
-  background: rgb(175, 171, 171);
+  background: white;
   font-family: 'Poppins', sans-serif;
   text-align: center;
 }
@@ -13,7 +13,7 @@ header {
 
 /* Time-section ================================== */
 #time {
-  padding: 5rem;
+  padding: 2rem;
   font-size: 50px;
   border-radius: 1.5rem;
   border-style: solid;
@@ -37,7 +37,6 @@ header {
 /* History-section ================================== */
 #finalized {
   padding-top: 500px;
-  color: red;
 }
 
 /* Footer ================================== */
