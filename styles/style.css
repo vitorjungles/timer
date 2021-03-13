@@ -26,12 +26,13 @@ header {
   border-color: black;
   padding: 2rem;
   font-size: 30px;
-  margin-bottom: 6rem;
+  margin-bottom: 3rem;
 }
 
 #inicial:hover {
+  margin-bottom: 2.62rem;
   margin-top: 45px;
-  margin-bottom: 6.3rem;
+  border-bottom-width: 0.8rem;
 }
 
 /* History-section ================================== */
