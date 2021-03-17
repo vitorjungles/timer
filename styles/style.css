@@ -1,6 +1,5 @@
 /* Global ================================== */
 * {
-  background: white;
   font-family: 'Poppins', sans-serif;
   text-align: center;
 }
@@ -19,6 +18,10 @@ header {
   border-style: solid;
 }
 
+#time:focus {
+  outline-style: none;
+}
+
 #inicial {
   margin-top: 50px;
   border-radius: 2rem;
@@ -28,6 +31,10 @@ header {
   font-size: 30px;
   border: solid #0070F3;
   box-shadow: 5px 5px 20px #2a8dff;
+}
+
+#inicial:focus {
+  outline-style: none;
 }
 
 #inicial:hover {
