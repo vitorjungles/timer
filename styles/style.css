@@ -22,25 +22,20 @@ header {
 #inicial {
   margin-top: 50px;
   border-radius: 2rem;
-  border-style: solid;
-  border-color: black;
+  background: #0070F3;
+  color: white;
   padding: 2rem;
   font-size: 30px;
-  margin-bottom: 3rem;
+  border: solid #0070F3;
+  box-shadow: 5px 5px 20px #2a8dff;
 }
 
 #inicial:hover {
-  margin-bottom: 2.62rem;
-  margin-top: 45px;
-  border-bottom-width: 0.8rem;
-}
-
-/* History-section ================================== */
-#finalized {
-  padding-top: 500px;
+  background: #2a8dff;
+  border: solid #2a8dff;
 }
 
 /* Footer ================================== */
 footer {
-  padding-top: 20rem;
+  padding-top: 10rem;
 }

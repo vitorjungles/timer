@@ -26,6 +26,13 @@ document.getElementById("inicial").onclick = function() {
         elem = elem[3]=='0' ? `${elem[0]}${elem[1]}${elem[2]}${elem[4]}`: elem;
         var ms = new Date().getHours()+':'+new Date().getMinutes()+':'+new Date().getSeconds();
         var m = new Date().getHours()+':'+new Date().getMinutes();
+        ms = ms.split(':');
+        if (ms[1].length<2) {
+          ms[1] = '0'+ms[1];
+        } else if (ms[2].length<2) {
+          ms[2] = '0'+ms[2];
+        };
+        ms = ms.join(':');
         document.getElementById("count").textContent=`Now: ${ms}`;
         console.log([elem, m, ms]);
         if (elem==m) {
