@@ -16,9 +16,10 @@ header {
   font-size: 50px;
   border-radius: 1.5rem;
   border-style: solid;
+  cursor: pointer;
 }
 
-#time:focus {
+#time:focus, #inicial:focus {
   outline-style: none;
 }
 
@@ -31,10 +32,7 @@ header {
   font-size: 30px;
   border: solid #0070F3;
   box-shadow: 5px 5px 20px #2a8dff;
-}
-
-#inicial:focus {
-  outline-style: none;
+  cursor: pointer;
 }
 
 #inicial:hover {
