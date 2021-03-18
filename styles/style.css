@@ -12,8 +12,9 @@ header {
 
 /* Time-section ================================== */
 #time {
+  padding: 2rem;
   font-size: 1.6rem;
-  border-radius: 0.8rem;
+  border-radius: 1.5rem;
   border-style: solid;
   cursor: pointer;
 }
@@ -41,5 +42,5 @@ header {
 
 /* Footer ================================== */
 footer {
-  padding-top: 20rem;
+  padding-top: 16rem;
 }

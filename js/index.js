@@ -20,8 +20,10 @@ document.getElementById("inicial").onclick = function() {
     };
     if (elem!='') {
       v=false;
-      // First interval
+
+      // Interval
       var interval = setInterval(e, 1000);
+
       function e() {
         elem = elem[3]=='0' ? `${elem[0]}${elem[1]}${elem[2]}${elem[4]}`: elem;
         var ms = new Date().getHours()+':'+new Date().getMinutes()+':'+new Date().getSeconds();
@@ -33,8 +35,12 @@ document.getElementById("inicial").onclick = function() {
           ms[2] = '0'+ms[2];
         };
         ms = ms.join(':');
-        document.getElementById("count").textContent=`Now: ${ms}`;
-        console.log([elem, m, ms]);
+
+        var count = document.createElement("h1");
+        count.textContent = `Now: ${ms}`;
+        document.getElementsByTagName("h1").length<2 ? document.querySelector("h2").before(count) : document.getElementsByTagName("h1").item(1).textContent = `Now: ${ms}`;
+        console.log(document.querySelector("section"));
+
         if (elem==m) {
           clearInterval(interval);
           v=true;
