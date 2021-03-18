@@ -12,12 +12,10 @@ header {
 
 /* Time-section ================================== */
 #time {
-  padding: 2rem;
   font-size: 1.6rem;
-  border-radius: 1.5rem;
+  border-radius: 0.8rem;
   border-style: solid;
   cursor: pointer;
-  text-align: center;
 }
 
 #time:focus, #inicial:focus {
@@ -43,5 +41,5 @@ header {
 
 /* Footer ================================== */
 footer {
-  padding-top: 16rem;
+  padding-top: 20rem;
 }
