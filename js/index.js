@@ -1,4 +1,4 @@
-// Exchanging year text
+// Exchanging year
 var year = document.createElement("span");
 year.textContent = ` ${new Date().getFullYear()}`;
 document.getElementById("copyright").after(year);
