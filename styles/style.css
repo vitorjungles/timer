@@ -17,6 +17,7 @@ header {
   border-radius: 1.5rem;
   border-style: solid;
   cursor: pointer;
+  text-align: center;
 }
 
 #time:focus, #inicial:focus {
