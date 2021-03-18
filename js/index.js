@@ -1,5 +1,7 @@
 // Exchanging year text
-document.getElementById("year").textContent = new Date().getFullYear();
+var year = document.createElement("span");
+year.textContent = ` ${new Date().getFullYear()}`;
+document.getElementById("copyright").after(year);
 
 // Permission variable
 var v=true;
