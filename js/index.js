@@ -39,7 +39,6 @@ document.getElementById("inicial").onclick = function() {
         var count = document.createElement("h1");
         count.textContent = `Now: ${ms}`;
         document.getElementsByTagName("h1").length<2 ? document.querySelector("h2").before(count) : document.getElementsByTagName("h1").item(1).textContent = `Now: ${ms}`;
-        console.log(document.querySelector("section"));
 
         if (elem==m) {
           clearInterval(interval);
