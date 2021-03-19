@@ -3,9 +3,6 @@ var year = document.createElement("span");
 year.textContent = ` ${new Date().getFullYear()}`;
 document.getElementById("copyright").after(year);
 
-// Permission variable
-var v=true;
-
 // Exchange text and color function
 function exchange(variable, text, color='black') {
   variable.style.color=color;
@@ -13,42 +10,26 @@ function exchange(variable, text, color='black') {
   return variable;
 };
 
-// Button click function
+// Start Button function
 document.getElementById("inicial").onclick = function() {
-  if (v) {
-    var elem=original=document.getElementById("time").value;
-    if (document.getElementById("alert").textContent!='Enter the desired time below:') {
-      exchange(document.getElementById("alert"), 'Enter the desired time below:');
-    };
-    if (elem!='') {
-      v=false;
-
-      // Interval
-      var interval = setInterval(e, 1000);
-
-      function e() {
-        elem = elem[3]=='0' ? `${elem[0]}${elem[1]}${elem[2]}${elem[4]}`: elem;
-        var ms = new Date().getHours()+':'+new Date().getMinutes()+':'+new Date().getSeconds();
-        var m = new Date().getHours()+':'+new Date().getMinutes();
-        ms = ms.split(':');
-        if (ms[1].length<2) {
-          ms[1] = '0'+ms[1];
-        } else if (ms[2].length<2) {
-          ms[2] = '0'+ms[2];
-        };
-        ms = ms.join(':');
-
-        var count = document.createElement("h1");
-        count.textContent = `Now: ${ms}`;
-        document.getElementsByTagName("h1").length<2 ? document.querySelector("h2").before(count) : document.getElementsByTagName("h1").item(1).textContent = `Now: ${ms}`;
-
-        if (elem==m) {
-          clearInterval(interval);
-          v=true;
-        };
-      };
-    } else {
-      exchange(document.getElementById("alert"), 'Enter the desired time below, please:', 'red');
-    };
+  var minutes = document.querySelectorAll("input").item(0);
+  var seconds = document.querySelectorAll("input").item(1);
+  var TimeSectionDiv = document.querySelector("div");
+  var TimeSection = document.querySelector("section");
+  if (document.getElementById("alert").textContent!='Enter the desired time below:') {
+    exchange(document.getElementById("alert"), 'Enter the desired time below:');
   };
+  if (((minutes.value!='00' && seconds.value!='00') || (minutes.value!='00' && seconds.value=='00') || (minutes.value=='00' && seconds.value!='00')) && (isNaN(minutes.value)==false && isNaN(seconds.value)==false)) {
+    TimeSectionDiv.hidden=true;
+    var Count = document.createElement("h1");
+    Count.textContent = minutes.value+':'+seconds.value;
+    TimeSectionDiv.before(Count);
+  } else {
+    exchange(document.getElementById("alert"), 'Enter the desired time below, please:', 'red');
+  };
+};
+
+// Reset Button function
+document.getElementById("reset").onclick = function() {
+  location.reload();
 };

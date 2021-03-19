@@ -15,12 +15,16 @@
   </header>
   <main>
     <section id="time-section">
-      <form>
+      <div>
         <h2 id="alert">Enter the desired time below:</h2>
-        <input id="time" type="time">
-        <br>
-        <input id="inicial" type="button" value="Start">
-      </form>
+        <div id="data-input">
+          <input id="minutes" type="text" maxlength="2" value="00">
+          :
+          <input id="seconds" type="text" maxlength="2" value="00">
+        </div>
+      </div>
+      <input class="button" id="inicial" type="button" value="Start">
+      <input class="button" id="reset" type="button" value="Reset">
     </section>
   </main>
   <footer>
