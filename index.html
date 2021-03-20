@@ -18,9 +18,9 @@
       <div>
         <h2 id="alert">Enter the desired time below:</h2>
         <div id="data-input">
-          <input id="minutes" type="text" maxlength="2" value="00">
+          <input id="minutes" name="data" type="text" maxlength="2" value="00" onkeypress="return validate(event);">
           :
-          <input id="seconds" type="text" maxlength="2" value="00">
+          <input id="seconds" name="data" type="text" maxlength="2" value="00" onkeypress="return validate(event);">
         </div>
       </div>
       <input class="button" id="inicial" type="button" value="Start">
@@ -30,6 +30,7 @@
   <footer>
     <span id="copyright">&copy;</span> - Made by Vítor Jungles
   </footer>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
   <script src="js/index.js"></script>
 </body>
 </html>

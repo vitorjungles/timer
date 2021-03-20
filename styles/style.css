@@ -11,6 +11,10 @@ header {
 }
 
 /* Time-section ================================== */
+#time-section {
+  height: 38rem;
+}
+
 #time-section h1 {
   font-size: 5rem;
 }
@@ -48,11 +52,7 @@ header {
 }
 
 .button:hover {
-  background: #2a8dff;
-  border: solid #2a8dff;
-}
-
-/* Footer ================================== */
-footer {
-  padding-top: 11rem;
+  background: #0077ff;
+  border: solid #0077ff;
+  box-shadow: 5px 5px 30px #2a8dff;
 }
