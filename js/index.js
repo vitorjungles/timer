@@ -28,7 +28,7 @@ function Reset(interval=false, div, c, btn, int, h, m, s, t, values=false, sound
   div.hidden = false;
   c.remove();
   btn.value = 'Start';
-  interval ? clearInterval(int) : h=h;
+  interval&&int!='' ? int.pause() : h=h;
   values ? [0, 1, 2].forEach(function(array) { document.querySelectorAll("input[name='data']").item(array).value='00' }) : h=h;
   h=m=s=t=0;
   if (sound) {
@@ -52,7 +52,6 @@ document.querySelector("#inicial").addEventListener('click', function time() {
     min=='' ? min='00' : min=min;
     sec=='' ? sec='00' : sec=sec;
     TimeSectionDiv.hidden=true;
-    verify=false;
     hrs = parseInt(hrs);
     min = parseInt(min);
     sec = parseInt(sec);
@@ -94,55 +93,86 @@ document.querySelector("#inicial").addEventListener('click', function time() {
       return result;
     };
 
-    Button.value = 'Pause';
-    Button.removeEventListener('click', time);
-    Button.addEventListener('click', pause);
-
-    // Reset Button function
-    document.querySelector("#reset").addEventListener('click', function() {
-      Reset(true, TimeSectionDiv, Count, Button, interval, hrs, min, sec, total, false, false);
-      hrs=min=sec=total=0;
-      Button.removeEventListener('click', pause, false);
-      Button.addEventListener('click', time);
-    });
-
-    // Pause function
-    function pause() {
-      clearInterval(interval);
-      Button.value = 'Continue';
-      Button.removeEventListener('click', pause);
-      Button.addEventListener('click', function go() {
-        interval = setInterval(e, 1000);
-        Button.value = 'Pause';
-        Button.removeEventListener('click', go);
-        Button.addEventListener('click', pause);
-      });
+    function Timer(callback, delay) {
+      var timerId;
+      var start;
+      var remaining = delay;
+    
+      this.pause = function () {
+        window.clearTimeout(timerId);
+        remaining -= new Date() - start;
+      };
+    
+      var resume = function () {
+        start = new Date();
+        timerId = window.setTimeout(function () {
+          remaining = delay;
+          resume();
+          callback();
+        }, remaining);
+      };
+      this.resume = resume;
+      
+      this.reset = function () {
+        remaining = delay;
+      };
     };
     
-    // Timer interval
-    var interval = total!=0 ? setInterval(e, 1000) : Reset(false, TimeSectionDiv, Count, Button, interval, hrs, min, sec, total, true, true);
+    if (total!=0) {
+      var timer = new Timer(co, 1000);
+
+      function co() {
+        if (min==0 && sec==0) {
+          min=sec=60;
+          min-=1;
+          hrs-=1;
+        } else if (sec==0) {
+          sec=60;
+          min-=1;
+        };
     
-    function e() {
-      if (min==0 && sec==0) {
-        min=sec=60;
-        min-=1;
-        hrs-=1;
-      } else if (sec==0) {
-        sec=60;
-        min-=1;
+        sec-=1;
+        total-=1;
+          
+        Count.textContent = display();
+
+        if (total==0) {
+          Reset(true, TimeSectionDiv, Count, Button, timer, hrs, min, sec, total, false, true);
+          Button.removeEventListener('click', p);
+          Button.addEventListener('click', time);
+          timer='';
+        };
       };
-  
-      sec-=1;
-      total-=1;
-        
-      Count.textContent = display();
-  
-      // Finish conditional
-      if (total==0) {
-        Reset(true, TimeSectionDiv, Count, Button, interval, hrs, min, sec, total, false, true);
-        Button.removeEventListener('click', pause);
+
+      document.querySelector("#inicial").addEventListener("click", timer.resume());
+      Button.value = 'Pause';
+      Button.removeEventListener('click', time);
+      Button.addEventListener('click', p);
+
+      function p() {
+        timer.pause();
+        Button.value = 'Continue';
+        Button.removeEventListener('click', p);
+        Button.addEventListener('click', go);
+      };
+
+      function go() {
+        timer.resume();
+        Button.value = 'Pause';
+        Button.removeEventListener('click', go);
+        Button.addEventListener('click', p);
+      };
+
+      // Reset Button function
+      document.querySelector("#reset").addEventListener('click', function() {
+        Reset(true, TimeSectionDiv, Count, Button, timer, hrs, min, sec, total, false, false);
+        hrs=min=sec=total=timer=0;
+        timer='';
+        Button.removeEventListener('click', p);
         Button.addEventListener('click', time);
-      };
+      });
+    } else {
+      Reset(false, TimeSectionDiv, Count, Button, timer, hrs, min, sec, total, true, true);
     };
   } else {
     exchange(document.querySelector("#alert"), 'Enter the desired time below, please:', 'red');
