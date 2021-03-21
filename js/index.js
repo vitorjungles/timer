@@ -120,7 +120,6 @@ document.querySelector("#inicial").addEventListener('click', function time() {
     
     if (total!=0) {
       var timer = new Timer(function() {
-        console.log(hrs, min, sec, total);
         if (min==0 && sec==0) {
           min=sec=60;
           min-=1;
