@@ -119,7 +119,6 @@ document.querySelector("#inicial").addEventListener('click', function() {
         sec=60;
         min-=1;
       };
-      console.log(hrs, min, sec, total);
 
       sec-=1;
       total-=1;
