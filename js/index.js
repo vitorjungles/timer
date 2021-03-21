@@ -28,7 +28,7 @@ function Reset(interval=false, div, c, btn, int, h, m, s, t, values=false, sound
   div.hidden = false;
   c.remove();
   btn.value = 'Start';
-  interval&&int!='' ? int.pause() : h=h;
+  interval&&int!=0 ? int.pause() : h=h;
   values ? [0, 1, 2].forEach(function(array) { document.querySelectorAll("input[name='data']").item(array).value='00' }) : h=h;
   h=m=s=t=0;
   if (sound) {
@@ -119,9 +119,8 @@ document.querySelector("#inicial").addEventListener('click', function time() {
     };
     
     if (total!=0) {
-      var timer = new Timer(co, 1000);
-
-      function co() {
+      var timer = new Timer(function() {
+        console.log(hrs, min, sec, total);
         if (min==0 && sec==0) {
           min=sec=60;
           min-=1;
@@ -130,19 +129,19 @@ document.querySelector("#inicial").addEventListener('click', function time() {
           sec=60;
           min-=1;
         };
-    
+
         sec-=1;
         total-=1;
-          
+
         Count.textContent = display();
 
         if (total==0) {
           Reset(true, TimeSectionDiv, Count, Button, timer, hrs, min, sec, total, false, true);
           Button.removeEventListener('click', p);
           Button.addEventListener('click', time);
-          timer='';
+          timer=0;
         };
-      };
+      }, 1000);
 
       document.querySelector("#inicial").addEventListener("click", timer.resume());
       Button.value = 'Pause';
@@ -167,7 +166,6 @@ document.querySelector("#inicial").addEventListener('click', function time() {
       document.querySelector("#reset").addEventListener('click', function() {
         Reset(true, TimeSectionDiv, Count, Button, timer, hrs, min, sec, total, false, false);
         hrs=min=sec=total=timer=0;
-        timer='';
         Button.removeEventListener('click', p);
         Button.addEventListener('click', time);
       });
