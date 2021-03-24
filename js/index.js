@@ -22,7 +22,7 @@ function exchange(variable, text, color='black') {
 };
 
 // Reset function
-function Reset(interval=false, div, c, btn, int, h, m, s, t, values=false, sound=false) {
+function Reset(div, c, btn, h, m, s, t, values=false, sound=false) {
   div.hidden = false;
   c.remove();
   btn.value = 'Start';
@@ -125,7 +125,7 @@ document.querySelector("#inicial").addEventListener('click', function time() {
         Count.textContent = display();
 
         if (total==0) {
-          Reset(true, TimeSectionDiv, Count, Button, timer, hrs, min, sec, total, false, true);
+          Reset(TimeSectionDiv, Count, Button, hrs, min, sec, total, false, true);
           Button.removeEventListener('click', p);
           Button.addEventListener('click', time);
           timer=0;
@@ -155,13 +155,13 @@ document.querySelector("#inicial").addEventListener('click', function time() {
 
       // Reset Button function
       document.querySelector("#reset").addEventListener('click', function() {
-        Reset(true, TimeSectionDiv, Count, Button, timer, hrs, min, sec, total, false, false);
+        Reset(TimeSectionDiv, Count, Button, hrs, min, sec, total, false, false);
         hrs=min=sec=total=timer=0;
         Button.removeEventListener('click', CurrentEvent);
         Button.addEventListener('click', time);
       });
     } else {
-      Reset(false, TimeSectionDiv, Count, Button, timer, hrs, min, sec, total, true, true);
+      Reset(TimeSectionDiv, Count, Button, hrs, min, sec, total, true, true);
     };
   } else {
     exchange(document.querySelector("#alert"), 'Enter the desired time below, please:', 'red');
