@@ -11,9 +11,7 @@ function validate() {
   return isNaN(document.querySelector("#minutes").value) ? false : true;
 };
 $(function() {
-  $("input[name='data']").on('input', function(e) {
-    $(this).val($(this).val().replace(/[^0-9]/g, ''));
-  });
+  $("input[name='data']").on('input', function(e) { $(this).val($(this).val().replace(/[^0-9]/g, '')); });
 });
 
 // Exchange text and color function
@@ -28,7 +26,6 @@ function Reset(interval=false, div, c, btn, int, h, m, s, t, values=false, sound
   div.hidden = false;
   c.remove();
   btn.value = 'Start';
-  interval&&int!=0 ? int.pause() : h=h;
   values ? [0, 1, 2].forEach(function(array) { document.querySelectorAll("input[name='data']").item(array).value='00' }) : h=h;
   h=m=s=t=0;
   if (sound) {
@@ -48,13 +45,11 @@ document.querySelector("#inicial").addEventListener('click', function time() {
     exchange(document.querySelector("#alert"), 'Enter the desired time below:');
   };
   if ((hrs!='00' || min!='00' || sec!='00')) {
-    hrs=='' ? hrs='00' : hrs=hrs;
-    min=='' ? min='00' : min=min;
-    sec=='' ? sec='00' : sec=sec;
+    var CurrentEvent = 'time';
+    hrs = hrs=='' ? parseInt('00') : parseInt(hrs);
+    min = min=='' ? parseInt('00') : parseInt(min);
+    sec = sec=='' ? parseInt('00') : parseInt(sec);
     TimeSectionDiv.hidden=true;
-    hrs = parseInt(hrs);
-    min = parseInt(min);
-    sec = parseInt(sec);
 
     var Count = document.createElement("h1"), Button = document.querySelector("#inicial"), total = (hrs*60*60)+(min*60)+sec;
 
@@ -77,9 +72,7 @@ document.querySelector("#inicial").addEventListener('click', function time() {
     TimeSectionDiv.before(Count);
 
     function display() {
-      var result = '';
-      result = hrs+':'+min+':'+sec;
-      result = result.split(':');
+      var result = (hrs+':'+min+':'+sec).split(':');
       if (result[0].length<2) {
         result[0] = '0'+result[0];
       };
@@ -89,14 +82,11 @@ document.querySelector("#inicial").addEventListener('click', function time() {
       if (result[2].length<2) {
         result[2] = '0'+result[2];
       };
-      result = result.join(':');
-      return result;
+      return result.join(':');
     };
 
     function Timer(callback, delay) {
-      var timerId;
-      var start;
-      var remaining = delay;
+      var timerId, start, remaining = delay;
     
       this.pause = function () {
         window.clearTimeout(timerId);
@@ -142,16 +132,17 @@ document.querySelector("#inicial").addEventListener('click', function time() {
         };
       }, 1000);
 
-      document.querySelector("#inicial").addEventListener("click", timer.resume());
+      timer.resume();
       Button.value = 'Pause';
       Button.removeEventListener('click', time);
       Button.addEventListener('click', p);
 
       function p() {
-        timer.pause();
+        timer.resume();
         Button.value = 'Continue';
         Button.removeEventListener('click', p);
         Button.addEventListener('click', go);
+        CurrentEvent = 'go';
       };
 
       function go() {
@@ -159,13 +150,20 @@ document.querySelector("#inicial").addEventListener('click', function time() {
         Button.value = 'Pause';
         Button.removeEventListener('click', go);
         Button.addEventListener('click', p);
+        CurrentEvent = 'pause';
       };
 
       // Reset Button function
       document.querySelector("#reset").addEventListener('click', function() {
         Reset(true, TimeSectionDiv, Count, Button, timer, hrs, min, sec, total, false, false);
         hrs=min=sec=total=timer=0;
-        Button.removeEventListener('click', p);
+        if (CurrentEvent=='pause') {
+          Button.removeEventListener('click', pause);
+        } else if (CurrentEvent=='go') {
+          Button.removeEventListener('click', go);
+        } else {
+          Button.removeEventListener('click', time);
+        };
         Button.addEventListener('click', time);
       });
     } else {
