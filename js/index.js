@@ -53,7 +53,7 @@ document.querySelector("#initial").addEventListener('click', function time() {
     sec = sec=='' ? parseInt('00') : parseInt(sec);
     TimeSectionDiv.hidden=true;
 
-    var Count = document.createElement("h1"), Button = document.querySelector("#inicial"), total = (hrs*60*60)+(min*60)+sec;
+    var Count = document.createElement("h1"), Button = document.querySelector("#initial"), total = (hrs*60*60)+(min*60)+sec;
 
     // Adjusting the time
     if (sec>60) {
