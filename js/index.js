@@ -39,11 +39,13 @@ function Reset(div, c, btn, h, m, s, t, values=false, sound=false) {
 };
 
 // Start Button function
-document.querySelector("#inicial").addEventListener('click', function time() {
+document.querySelector("#initial").addEventListener('click', function time() {
   var hrs = document.querySelectorAll("input").item(0).value, min = document.querySelectorAll("input").item(1).value, sec = document.querySelectorAll("input").item(2).value, TimeSectionDiv = document.querySelector("div");
   if (document.querySelector("#alert").textContent!='Enter the desired time below:') {
     exchange(document.querySelector("#alert"), 'Enter the desired time below:');
   };
+
+  // Verifying input
   if ((hrs!='00' || min!='00' || sec!='00')) {
     var CurrentEvent = time;
     hrs = hrs=='' ? parseInt('00') : parseInt(hrs);
@@ -53,6 +55,7 @@ document.querySelector("#inicial").addEventListener('click', function time() {
 
     var Count = document.createElement("h1"), Button = document.querySelector("#inicial"), total = (hrs*60*60)+(min*60)+sec;
 
+    // Adjusting the time
     if (sec>60) {
       var hours=hrs, minutes=min, seconds=sec;
       while (seconds>=60) {
@@ -71,6 +74,7 @@ document.querySelector("#inicial").addEventListener('click', function time() {
     Count.textContent = display();
     TimeSectionDiv.before(Count);
 
+    // Display function
     function display() {
       var result = (hrs+':'+min+':'+sec).split(':');
       if (result[0].length<2) {
@@ -85,14 +89,13 @@ document.querySelector("#inicial").addEventListener('click', function time() {
       return result.join(':');
     };
 
+    // Timer
     function Timer(callback, delay) {
       var timerId, start, remaining = delay;
-    
       this.pause = function () {
         window.clearTimeout(timerId);
         remaining -= new Date() - start;
       };
-    
       var resume = function () {
         start = new Date();
         timerId = window.setTimeout(function () {
@@ -102,13 +105,15 @@ document.querySelector("#inicial").addEventListener('click', function time() {
         }, remaining);
       };
       this.resume = resume;
-      
       this.reset = function () {
         remaining = delay;
       };
     };
-    
+
+    // Final verification
     if (total!=0) {
+
+      // Timer function
       var timer = new Timer(function() {
         if (min==0 && sec==0) {
           min=sec=60;
@@ -132,11 +137,13 @@ document.querySelector("#inicial").addEventListener('click', function time() {
         };
       }, 1000);
 
+      // Initial start
       timer.resume();
       Button.value = 'Pause';
       Button.removeEventListener('click', time);
       Button.addEventListener('click', p);
 
+      // Pause function
       function p() {
         timer!=0 ? timer.pause() : CurrentEvent=CurrentEvent;
         Button.value = 'Continue';
@@ -145,6 +152,7 @@ document.querySelector("#inicial").addEventListener('click', function time() {
         CurrentEvent = go;
       };
 
+      // Play function
       function go() {
         timer!=0 ? timer.resume() : CurrentEvent=CurrentEvent;
         Button.value = 'Pause';
