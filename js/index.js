@@ -45,7 +45,7 @@ document.querySelector("#inicial").addEventListener('click', function time() {
     exchange(document.querySelector("#alert"), 'Enter the desired time below:');
   };
   if ((hrs!='00' || min!='00' || sec!='00')) {
-    var CurrentEvent = 'time';
+    var CurrentEvent = time;
     hrs = hrs=='' ? parseInt('00') : parseInt(hrs);
     min = min=='' ? parseInt('00') : parseInt(min);
     sec = sec=='' ? parseInt('00') : parseInt(sec);
@@ -138,32 +138,26 @@ document.querySelector("#inicial").addEventListener('click', function time() {
       Button.addEventListener('click', p);
 
       function p() {
-        timer.resume();
+        timer!=0 ? timer.pause() : CurrentEvent=CurrentEvent;
         Button.value = 'Continue';
         Button.removeEventListener('click', p);
         Button.addEventListener('click', go);
-        CurrentEvent = 'go';
+        CurrentEvent = go;
       };
 
       function go() {
-        timer.resume();
+        timer!=0 ? timer.resume() : CurrentEvent=CurrentEvent;
         Button.value = 'Pause';
         Button.removeEventListener('click', go);
         Button.addEventListener('click', p);
-        CurrentEvent = 'pause';
+        CurrentEvent = p;
       };
 
       // Reset Button function
       document.querySelector("#reset").addEventListener('click', function() {
         Reset(true, TimeSectionDiv, Count, Button, timer, hrs, min, sec, total, false, false);
         hrs=min=sec=total=timer=0;
-        if (CurrentEvent=='pause') {
-          Button.removeEventListener('click', pause);
-        } else if (CurrentEvent=='go') {
-          Button.removeEventListener('click', go);
-        } else {
-          Button.removeEventListener('click', time);
-        };
+        Button.removeEventListener('click', CurrentEvent);
         Button.addEventListener('click', time);
       });
     } else {
