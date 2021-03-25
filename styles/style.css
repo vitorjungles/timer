@@ -61,7 +61,7 @@ header {
 
 /* Footer ================================== */
 footer {
-  margin-top: 12%;
+  margin-top: 16%;
 }
 
 /* Alternative styles ================================== */
@@ -98,6 +98,11 @@ footer {
     margin: 4rem 0.4rem 0;
     padding: 1.1rem;
     font-size: 25px;
+  }
+
+  footer {
+    margin-top: 34%;
+    font-size: 0.8rem;
   }
 }
 
