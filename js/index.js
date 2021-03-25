@@ -56,7 +56,7 @@ document.querySelector("#initial").addEventListener('click', function time() {
     var Count = document.createElement("h1"), Button = document.querySelector("#initial"), total = (hrs*60*60)+(min*60)+sec;
 
     // Adjusting the time
-    if (sec>60) {
+    if ((sec || min)>=60) {
       var hours=hrs, minutes=min, seconds=sec;
       while (seconds>=60) {
         seconds-=60;
