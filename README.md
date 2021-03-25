@@ -18,4 +18,4 @@ This project was done with HTML5, CSS3 and JavaScript.
 This project is under the MIT license. Read the file [LICENSE](https://github.com/vitorjungles/timer/blob/master/LICENSE) for more information.
 
 ## :arrow_right: How to access the Timer?
-To access the Timer [click here](https://vitorjungles.github.io/timer/). :timer:
+To access the Timer [click here](https://vitorjungles.github.io/timer/). :timer_clock:
