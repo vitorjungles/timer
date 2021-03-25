@@ -9,7 +9,7 @@ This project is a practical and easy timer.
 The aim of this project is to help the people organize their time better.
 
 ## :question: How does the Timer work?
-Enter the desired time and the Timer will start instantly.
+Enter the desired time and the Timer will start instantly. When the time is up, the alarm will go off.
 
 ## :computer: What technologies are used?
 This project was done with HTML5, CSS3 and JavaScript.
