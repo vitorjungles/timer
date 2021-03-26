@@ -23,7 +23,9 @@ function Reset(div, c, btn, h, m, s, t, values=false, sound=false) {
   div.hidden = false;
   c.remove();
   btn.value = 'Start';
-  values ? [0, 1, 2].forEach(function(array) { document.querySelectorAll("input[name='data']").item(array).value='00' }) : h=h;
+  if (values) {
+    [0, 1, 2].forEach(function(array) { document.querySelectorAll("input[name='data']").item(array).value='00' });
+  };
   h=m=s=t=0;
   if (sound) {
     let context = new AudioContext(), oscillator = context.createOscillator(), contextGain = context.createGain();
@@ -137,7 +139,9 @@ document.querySelector("#initial").addEventListener('click', function time() {
 
       // Pause function
       function p() {
-        timer!=0 ? timer.pause() : CurrentEvent=CurrentEvent;
+        if (timer!=0) {
+          timer.pause();
+        };
         Button.value = 'Continue';
         Button.removeEventListener('click', p);
         Button.addEventListener('click', go);
@@ -146,7 +150,9 @@ document.querySelector("#initial").addEventListener('click', function time() {
 
       // Play function
       function go() {
-        timer!=0 ? timer.resume() : CurrentEvent=CurrentEvent;
+        if (timer!=0) {
+          timer.resume();
+        };
         Button.value = 'Pause';
         Button.removeEventListener('click', go);
         Button.addEventListener('click', p);
