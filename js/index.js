@@ -1,4 +1,3 @@
-// Exchanging year
 var year = document.createElement("span");
 year.textContent = ` ${new Date().getFullYear()}`;
 document.querySelector("#copyright").after(year);
@@ -14,14 +13,12 @@ $(function() {
   $("input[name='data']").on('input', function(e) { $(this).val($(this).val().replace(/[^0-9]/g, '')); });
 });
 
-// Exchange text and color function
 function exchange(variable, text, color='black') {
   variable.style.color=color;
   variable.textContent=text;
   return variable;
 };
 
-// Reset function
 function Reset(div, c, btn, h, m, s, t, values=false, sound=false) {
   div.hidden = false;
   c.remove();
@@ -38,14 +35,12 @@ function Reset(div, c, btn, h, m, s, t, values=false, sound=false) {
   };
 };
 
-// Start Button function
 document.querySelector("#initial").addEventListener('click', function time() {
   var hrs = document.querySelectorAll("input").item(0).value, min = document.querySelectorAll("input").item(1).value, sec = document.querySelectorAll("input").item(2).value, TimeSectionDiv = document.querySelector("div");
   if (document.querySelector("#alert").textContent!='Enter the desired time below:') {
     exchange(document.querySelector("#alert"), 'Enter the desired time below:');
   };
 
-  // Verifying input
   if ((hrs!='00' || min!='00' || sec!='00')) {
     var CurrentEvent = time;
     hrs = hrs=='' ? parseInt('00') : parseInt(hrs);
@@ -55,7 +50,6 @@ document.querySelector("#initial").addEventListener('click', function time() {
 
     var Count = document.createElement("h1"), Button = document.querySelector("#initial"), total = (hrs*60*60)+(min*60)+sec;
 
-    // Adjusting the time
     if ((sec>=60) || (min>=60)) {
       var hours=hrs, minutes=min, seconds=sec;
       while (seconds>=60) {
@@ -74,7 +68,6 @@ document.querySelector("#initial").addEventListener('click', function time() {
     Count.textContent = display();
     TimeSectionDiv.before(Count);
 
-    // Display function
     function display() {
       var result = (hrs+':'+min+':'+sec).split(':');
       if (result[0].length<2) {
@@ -110,7 +103,6 @@ document.querySelector("#initial").addEventListener('click', function time() {
       };
     };
 
-    // Final verification
     if (total!=0) {
 
       // Timer function
@@ -161,7 +153,6 @@ document.querySelector("#initial").addEventListener('click', function time() {
         CurrentEvent = p;
       };
 
-      // Reset Button function
       document.querySelector("#reset").addEventListener('click', function() {
         Reset(TimeSectionDiv, Count, Button, hrs, min, sec, total, false, false);
         hrs=min=sec=total=timer=0;
