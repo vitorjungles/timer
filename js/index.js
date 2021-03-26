@@ -83,7 +83,6 @@ document.querySelector("#initial").addEventListener('click', function time() {
       return result.join(':');
     };
 
-    // Timer
     function Timer(callback, delay) {
       var timerId, start, remaining = delay;
       this.pause = function () {
