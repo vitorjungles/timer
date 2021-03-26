@@ -2,7 +2,6 @@ var year = document.createElement("span");
 year.textContent = ` ${new Date().getFullYear()}`;
 document.querySelector("#copyright").after(year);
 
-// Input validation
 function validate() {
   if (isNaN(document.querySelector("#minutes").value)) {
     document.querySelector("#minutes").value = '';
