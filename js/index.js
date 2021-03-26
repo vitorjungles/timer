@@ -128,13 +128,11 @@ document.querySelector("#initial").addEventListener('click', function time() {
         };
       }, 1000);
 
-      // Initial start
       timer.resume();
       Button.value = 'Pause';
       Button.removeEventListener('click', time);
       Button.addEventListener('click', pause);
 
-      // Pause function
       function pause() {
         if (timer!=0) {
           timer.pause();
@@ -145,7 +143,6 @@ document.querySelector("#initial").addEventListener('click', function time() {
         CurrentEvent = go;
       };
 
-      // Play function
       function go() {
         if (timer!=0) {
           timer.resume();
