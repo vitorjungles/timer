@@ -9,7 +9,7 @@ function validate() {
   return isNaN(document.querySelector("#minutes").value) ? false : true;
 };
 $(function() {
-  $("input[name='data']").on('input', function(e) { $(this).val($(this).val().replace(/[^0-9]/g, '')); });
+  $("input[name='data']").on('input', function(e) { $(this).val($(this).val().replace(/[^0-9]/g, '')) });
 });
 
 function exchange(variable, text, color='black') {
@@ -105,8 +105,6 @@ document.querySelector("#initial").addEventListener('click', function time() {
     };
 
     if (total!=0) {
-
-      // Timer function
       var timer = new Timer(function() {
         if (min==0 && sec==0) {
           min=sec=60;
@@ -124,7 +122,7 @@ document.querySelector("#initial").addEventListener('click', function time() {
 
         if (total==0) {
           Reset(TimeSectionDiv, Count, Button, hrs, min, sec, total, false, true);
-          Button.removeEventListener('click', p);
+          Button.removeEventListener('click', pause);
           Button.addEventListener('click', time);
           timer=0;
         };
@@ -134,15 +132,15 @@ document.querySelector("#initial").addEventListener('click', function time() {
       timer.resume();
       Button.value = 'Pause';
       Button.removeEventListener('click', time);
-      Button.addEventListener('click', p);
+      Button.addEventListener('click', pause);
 
       // Pause function
-      function p() {
+      function pause() {
         if (timer!=0) {
           timer.pause();
         };
         Button.value = 'Continue';
-        Button.removeEventListener('click', p);
+        Button.removeEventListener('click', pause);
         Button.addEventListener('click', go);
         CurrentEvent = go;
       };
@@ -154,8 +152,8 @@ document.querySelector("#initial").addEventListener('click', function time() {
         };
         Button.value = 'Pause';
         Button.removeEventListener('click', go);
-        Button.addEventListener('click', p);
-        CurrentEvent = p;
+        Button.addEventListener('click', pause);
+        CurrentEvent = pause;
       };
 
       document.querySelector("#reset").addEventListener('click', function() {
