@@ -1,22 +1,18 @@
-/* Global ================================== */
 * {
   font-family: 'Poppins', sans-serif;
   text-align: center;
 }
 
-/* Body ================================== */
 body {
   min-width: 500px;
   width: auto;
 }
 
-/* Header ================================== */
 header {
   font-size: 2.5rem;
   margin-bottom: 12rem;
 }
 
-/* Time-section ================================== */
 #time-section h1 {
   font-size: 5rem;
 }
@@ -59,12 +55,10 @@ header {
   box-shadow: 5px 5px 30px #2a8dff;
 }
 
-/* Footer ================================== */
 footer {
   margin-top: 16%;
 }
 
-/* Alternative styles ================================== */
 @media screen and (max-width: 420px) and (max-height: 900px) {
   body {
     min-width: 270px;
