@@ -86,25 +86,26 @@ document.querySelector("#initial").addEventListener('click', function time() {
     function Timer(callback, delay) {
       var timerId, start, remaining = delay;
       this.pause = function () {
-        window.clearTimeout(timerId);
+        clearTimeout(timerId);
         remaining -= new Date() - start;
       };
       var resume = function () {
         start = new Date();
-        timerId = window.setTimeout(function () {
+        timerId = setTimeout(function () {
           remaining = delay;
           resume();
-          callback();
+          callback(timerId);
         }, remaining);
       };
       this.resume = resume;
-      this.reset = function () {
-        remaining = delay;
+      this.clear = function () { 
+        clearTimeout(timerId);
       };
     };
 
     if (total!=0) {
-      var timer = new Timer(function() {
+      var ResetButton = document.querySelector("#reset");
+      var timer = new Timer(function () {
         if (min==0 && sec==0) {
           min=sec=60;
           min-=1;
@@ -123,39 +124,37 @@ document.querySelector("#initial").addEventListener('click', function time() {
           Reset(TimeSectionDiv, Count, Button, hrs, min, sec, total, false, true);
           Button.removeEventListener('click', pause);
           Button.addEventListener('click', time);
-          timer=0;
+          timer.clear();
         };
       }, 1000);
 
       timer.resume();
       Button.value = 'Pause';
       Button.removeEventListener('click', time);
-      Button.addEventListener('click', pause);
+      Button.addEventListener('click', pause, { once: true });
 
       function pause() {
-        if (timer!=0) {
-          timer.pause();
-        };
+        timer.pause();
         Button.value = 'Continue';
         Button.removeEventListener('click', pause);
         Button.addEventListener('click', go);
         CurrentEvent = go;
+        
       };
 
       function go() {
-        if (timer!=0) {
-          timer.resume();
-        };
+        timer.resume();
         Button.value = 'Pause';
         Button.removeEventListener('click', go);
         Button.addEventListener('click', pause);
         CurrentEvent = pause;
       };
 
-      document.querySelector("#reset").addEventListener('click', function() {
+      ResetButton.addEventListener('click', function stop() {
         Reset(TimeSectionDiv, Count, Button, hrs, min, sec, total, false, false);
-        hrs=min=sec=total=timer=0;
-        Button.removeEventListener('click', CurrentEvent);
+        hrs=min=sec=total=0;
+        timer.clear();
+        Button.removeEventListener('click', CurrentEvent)
         Button.addEventListener('click', time);
       });
     } else {
