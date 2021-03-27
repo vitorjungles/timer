@@ -11,7 +11,7 @@ function validate() {
   return isNaN(document.querySelector("#minutes").value) ? false : true;
 };
 $(function() {
-  $("input[name='data']").on('input', function(e) { $(this).val($(this).val().replace(/[^0-9]/g, '')) });
+  $("input[name='data']").on('input', function (e) { $(this).val($(this).val().replace(/[^0-9]/g, '')) });
 });
 
 function exchange(variable, text, color='black') {
@@ -25,7 +25,7 @@ function Reset(div, c, btn, h, m, s, t, values=false, sound=false) {
   c.remove();
   btn.value = 'Start';
   if (values) {
-    [0, 1, 2].forEach(function(array) { document.querySelectorAll("input[name='data']").item(array).value='00' });
+    [0, 1, 2].forEach(function (array) { document.querySelectorAll("input[name='data']").item(array).value='00' });
   };
   h=m=s=t=0;
   if (sound) {
@@ -39,11 +39,10 @@ function Reset(div, c, btn, h, m, s, t, values=false, sound=false) {
 };
 
 if (reload) {
-  console.log(sessionStorage.getItem("OriginalTime").substring(2, 0), sessionStorage.getItem("OriginalTime").substring(5, 3), sessionStorage.getItem("OriginalTime").substring(8, 6));
   document.querySelectorAll("input").item(0).value = sessionStorage.getItem("OriginalTime").substring(2, 0);
   document.querySelectorAll("input").item(1).value = sessionStorage.getItem("OriginalTime").substring(5, 3);
   document.querySelectorAll("input").item(2).value = sessionStorage.getItem("OriginalTime").substring(8, 6);
-  ["OriginalTime", "Reload"].forEach(function (array) { sessionStorage.removeItem(array) })
+  ["OriginalTime", "Reload"].forEach(function (array) { sessionStorage.removeItem(array) });
 };
 
 document.querySelector("#initial").addEventListener('click', function time() {
@@ -51,7 +50,8 @@ document.querySelector("#initial").addEventListener('click', function time() {
   if (document.querySelector("#alert").textContent!='Enter the desired time below:') {
     exchange(document.querySelector("#alert"), 'Enter the desired time below:');
   };
-
+  document.querySelector("#initial").removeEventListener("click", time);
+  document.querySelector("#initial").addEventListener("click", time);
   if ((hrs!='00' || min!='00' || sec!='00')) {
     hrs = hrs=='' ? parseInt('00') : parseInt(hrs);
     min = min=='' ? parseInt('00') : parseInt(min);
@@ -80,14 +80,10 @@ document.querySelector("#initial").addEventListener('click', function time() {
 
     function display() {
       var result = (hrs+':'+min+':'+sec).split(':');
-      if (result[0].length<2) {
-        result[0] = '0'+result[0];
-      };
-      if (result[1].length<2) {
-        result[1] = '0'+result[1];
-      };
-      if (result[2].length<2) {
-        result[2] = '0'+result[2];
+      for (let c=0; c<3; c++) {
+        if (result[c].length<2) {
+          result[c] = '0'+result[c];
+        };
       };
       return result.join(':');
     };
@@ -107,9 +103,7 @@ document.querySelector("#initial").addEventListener('click', function time() {
         }, remaining);
       };
       this.resume = resume;
-      this.clear = function () { 
-        clearTimeout(timerId);
-      };
+      this.clear = function () { clearTimeout(timerId) };
     };
 
     if (total>0) {
@@ -139,29 +133,25 @@ document.querySelector("#initial").addEventListener('click', function time() {
       timer.resume();
       Button.value = 'Pause';
       Button.removeEventListener('click', time);
-      Button.addEventListener('click', pause);
+      Button.addEventListener('click', pause, { once: true });
 
       function pause() {
         timer.pause();
         Button.value = 'Continue';
-        Button.removeEventListener('click', pause);
-        Button.addEventListener('click', go);
-        CurrentEvent = go;
+        Button.addEventListener('click', go, { once: true });
       };
 
       function go() {
         timer.resume();
         Button.value = 'Pause';
-        Button.removeEventListener('click', go);
-        Button.addEventListener('click', pause);
-        CurrentEvent = pause;
+        Button.addEventListener('click', pause, { once: true });
       };
 
-      document.querySelector("#reset").addEventListener('click', function () {
+      document.querySelector("#reset").addEventListener('click', function stop() {
         sessionStorage.setItem("OriginalTime", Original);
         sessionStorage.setItem("Reload", 'true');
         location.reload();
-      });
+      }, { once: true });
     } else {
       Reset(TimeSectionDiv, Count, Button, hrs, min, sec, total, true, true);
     };
