@@ -2,6 +2,8 @@ var year = document.createElement("span");
 year.textContent = ` ${new Date().getFullYear()}`;
 document.querySelector("#copyright").after(year);
 
+var reload = sessionStorage.getItem("Reload");
+
 function validate() {
   if (isNaN(document.querySelector("#minutes").value)) {
     document.querySelector("#minutes").value = '';
@@ -36,6 +38,14 @@ function Reset(div, c, btn, h, m, s, t, values=false, sound=false) {
   };
 };
 
+if (reload) {
+  console.log(sessionStorage.getItem("OriginalTime").substring(2, 0), sessionStorage.getItem("OriginalTime").substring(5, 3), sessionStorage.getItem("OriginalTime").substring(8, 6));
+  document.querySelectorAll("input").item(0).value = sessionStorage.getItem("OriginalTime").substring(2, 0);
+  document.querySelectorAll("input").item(1).value = sessionStorage.getItem("OriginalTime").substring(5, 3);
+  document.querySelectorAll("input").item(2).value = sessionStorage.getItem("OriginalTime").substring(8, 6);
+  ["OriginalTime", "Reload"].forEach(function (array) { sessionStorage.removeItem(array) })
+};
+
 document.querySelector("#initial").addEventListener('click', function time() {
   var hrs = document.querySelectorAll("input").item(0).value, min = document.querySelectorAll("input").item(1).value, sec = document.querySelectorAll("input").item(2).value, TimeSectionDiv = document.querySelector("div");
   if (document.querySelector("#alert").textContent!='Enter the desired time below:') {
@@ -43,13 +53,12 @@ document.querySelector("#initial").addEventListener('click', function time() {
   };
 
   if ((hrs!='00' || min!='00' || sec!='00')) {
-    var CurrentEvent = time;
     hrs = hrs=='' ? parseInt('00') : parseInt(hrs);
     min = min=='' ? parseInt('00') : parseInt(min);
     sec = sec=='' ? parseInt('00') : parseInt(sec);
     TimeSectionDiv.hidden=true;
 
-    var Count = document.createElement("h1"), Button = document.querySelector("#initial"), total = (hrs*60*60)+(min*60)+sec;
+    var Count = document.createElement("h1"), Button = document.querySelector("#initial"), total = (hrs*60*60)+(min*60)+sec, Original = display();
 
     if ((sec>=60) || (min>=60)) {
       var hours=hrs, minutes=min, seconds=sec;
@@ -103,8 +112,7 @@ document.querySelector("#initial").addEventListener('click', function time() {
       };
     };
 
-    if (total!=0) {
-      var ResetButton = document.querySelector("#reset");
+    if (total>0) {
       var timer = new Timer(function () {
         if (min==0 && sec==0) {
           min=sec=60;
@@ -131,7 +139,7 @@ document.querySelector("#initial").addEventListener('click', function time() {
       timer.resume();
       Button.value = 'Pause';
       Button.removeEventListener('click', time);
-      Button.addEventListener('click', pause, { once: true });
+      Button.addEventListener('click', pause);
 
       function pause() {
         timer.pause();
@@ -139,7 +147,6 @@ document.querySelector("#initial").addEventListener('click', function time() {
         Button.removeEventListener('click', pause);
         Button.addEventListener('click', go);
         CurrentEvent = go;
-        
       };
 
       function go() {
@@ -150,12 +157,10 @@ document.querySelector("#initial").addEventListener('click', function time() {
         CurrentEvent = pause;
       };
 
-      ResetButton.addEventListener('click', function stop() {
-        Reset(TimeSectionDiv, Count, Button, hrs, min, sec, total, false, false);
-        hrs=min=sec=total=0;
-        timer.clear();
-        Button.removeEventListener('click', CurrentEvent)
-        Button.addEventListener('click', time);
+      document.querySelector("#reset").addEventListener('click', function () {
+        sessionStorage.setItem("OriginalTime", Original);
+        sessionStorage.setItem("Reload", 'true');
+        location.reload();
       });
     } else {
       Reset(TimeSectionDiv, Count, Button, hrs, min, sec, total, true, true);
