@@ -5,7 +5,6 @@
 
 body {
   min-width: 500px;
-  width: auto;
 }
 
 header {
@@ -80,7 +79,6 @@ a:hover, a:focus {
 
   #time-section {
     font-size: 0.8rem;
-    height: 16rem;
   }
 
   #time-section h1 {
@@ -89,7 +87,7 @@ a:hover, a:focus {
 
   #data-input {
     font-size: 1.2rem;
-    width: 18.7rem;
+    width: 19rem;
   }
 
   #hours, #minutes, #seconds {
@@ -104,7 +102,7 @@ a:hover, a:focus {
   }
 
   footer {
-    margin-top: 34%;
+    margin-top: 3rem;
     font-size: 0.8rem;
   }
 }
@@ -130,6 +128,6 @@ a:hover, a:focus {
   }
 
   footer {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 }
