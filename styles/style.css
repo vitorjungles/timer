@@ -64,7 +64,7 @@ a {
   text-decoration: underline;
 }
 
-a:hover {
+a:hover, a:focus {
   color: rgb(0, 150, 100);
 }
 
