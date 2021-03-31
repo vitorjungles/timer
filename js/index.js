@@ -67,7 +67,8 @@ document.querySelector("#initial").addEventListener('click', function time() {
 
     var Count = document.createElement("h1");
     var Button = document.querySelector("#initial");
-    var total = (hrs*60*60)+(min*60)+sec, Original = display();
+    var total = (hrs * 60 * 60) + (min * 60) + sec;
+    var Original = display();
 
     if ((sec >= 60) || (min >= 60)) {
       var hours = hrs, minutes = min, seconds = sec;
@@ -115,7 +116,7 @@ document.querySelector("#initial").addEventListener('click', function time() {
       this.clear = function () { clearTimeout(timerId) };
     };
 
-    if (total>0) {
+    if (total > 0) {
       var timer = new Timer(function () {
         if (min == 0 && sec == 0) {
           min = sec = 60;
