@@ -51,7 +51,7 @@ document.querySelector("#initial").addEventListener('click', function time() {
   var sec = document.querySelectorAll("input").item(2).value;
   var TimeSectionDiv = document.querySelector("div");
 
-  if (document.querySelector("#alert").textContent!='Enter the desired time below:') {
+  if (document.querySelector("#alert").textContent != 'Enter the desired time below:') {
     exchange(document.querySelector("#alert"), 'Enter the desired time below:');
   };
 
