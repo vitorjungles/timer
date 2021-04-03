@@ -12,7 +12,7 @@ The aim of this project is to help the people organize their time better.
 Enter the desired time and the Timer will start instantly. When the time is up, the alarm will go off.
 
 ## :computer: What technologies are used?
-This project was done with HTML5, CSS3 and JavaScript.
+This project was done with HTML5, CSS3, JavaScript and jQuery.
 
 ## :pencil: License
 This project is under the MIT license. Read the file [LICENSE](https://github.com/vitorjungles/timer/blob/master/LICENSE) for more information.
