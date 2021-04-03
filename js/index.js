@@ -10,7 +10,7 @@ function validate() {
   };
   return isNaN(document.querySelector("#minutes").value) ? false : true;
 };
-$(function() {
+$(function () {
   $("input[name='data']").on('input', function (e) { $(this).val($(this).val().replace(/[^0-9]/g, '')) });
 });
 
@@ -63,7 +63,7 @@ document.querySelector("#initial").addEventListener('click', function time() {
     min = min == '' ? parseInt('00') : parseInt(min);
     sec = sec == '' ? parseInt('00') : parseInt(sec);
 
-    TimeSectionDiv.hidden=true;
+    TimeSectionDiv.hidden = true;
 
     var Count = document.createElement("h1");
     var Button = document.querySelector("#initial");
@@ -72,7 +72,7 @@ document.querySelector("#initial").addEventListener('click', function time() {
 
     if ((sec >= 60) || (min >= 60)) {
       var hours = hrs, minutes = min, seconds = sec;
-      while (seconds>=60) {
+      while (seconds >= 60) {
         seconds -= 60;
         minutes += 1;
       };
