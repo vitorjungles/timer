@@ -4,12 +4,6 @@ document.querySelector("#copyright").after(year);
 
 var reload = sessionStorage.getItem("Reload");
 
-function validate() {
-  if (isNaN(document.querySelector("#minutes").value)) {
-    document.querySelector("#minutes").value = '';
-  };
-  return isNaN(document.querySelector("#minutes").value) ? false : true;
-};
 $(function () {
   $("input[name='data']").on('input', function (e) { $(this).val($(this).val().replace(/[^0-9]/g, '')) });
 });
