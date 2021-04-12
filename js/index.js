@@ -5,8 +5,8 @@ document.querySelector("footer").hidden = false;
 
 var reload = sessionStorage.getItem("Reload");
 
-$(function () {
-  $("input[name='data']").on('input', function (e) { $(this).val($(this).val().replace(/[^0-9]/g, '')) });
+[0, 1, 2].forEach(function (array) {
+  document.querySelectorAll("input[name='data']")[array].oninput = (e) => { document.querySelectorAll("input[name='data']")[array].value = document.querySelectorAll("input[name='data']")[array].value.replace(/[^0-9]/g, '') } 
 });
 
 function exchange(variable, text, color = 'black') {
@@ -20,7 +20,7 @@ function Reset(div, c, btn, h, m, s, t, values = false, sound = false) {
   c.remove();
   btn.value = 'Start';
   if (values) {
-    [0, 1, 2].forEach(function (array) { document.querySelectorAll("input[name='data']").item(array).value = '00' });
+    [0, 1, 2].forEach(function (array) { document.querySelectorAll("input[name='data']")[array].value = '00' });
   };
   h = m = s = t = 0;
   if (sound) {
@@ -34,16 +34,16 @@ function Reset(div, c, btn, h, m, s, t, values = false, sound = false) {
 };
 
 if (reload) {
-  document.querySelectorAll("input").item(0).value = sessionStorage.getItem("OriginalTime").substring(2, 0);
-  document.querySelectorAll("input").item(1).value = sessionStorage.getItem("OriginalTime").substring(5, 3);
-  document.querySelectorAll("input").item(2).value = sessionStorage.getItem("OriginalTime").substring(8, 6);
+  document.querySelectorAll("input")[0].value = sessionStorage.getItem("OriginalTime").substring(2, 0);
+  document.querySelectorAll("input")[1].value = sessionStorage.getItem("OriginalTime").substring(5, 3);
+  document.querySelectorAll("input")[2].value = sessionStorage.getItem("OriginalTime").substring(8, 6);
   ["OriginalTime", "Reload"].forEach(function (array) { sessionStorage.removeItem(array) });
 };
 
 document.querySelector("#initial").addEventListener('click', function time() {
-  var hrs = document.querySelectorAll("input").item(0).value;
-  var min = document.querySelectorAll("input").item(1).value;
-  var sec = document.querySelectorAll("input").item(2).value;
+  var hrs = document.querySelectorAll("input")[0].value;
+  var min = document.querySelectorAll("input")[1].value;
+  var sec = document.querySelectorAll("input")[2].value;
   var TimeSectionDiv = document.querySelector("div");
 
   if (document.querySelector("#alert").textContent != 'Enter the desired time below:') {
