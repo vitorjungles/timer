@@ -1,6 +1,7 @@
 var year = document.createElement("span");
 year.textContent = ` ${new Date().getFullYear()}`;
 document.querySelector("#copyright").after(year);
+document.querySelector("footer").hidden = false;
 
 var reload = sessionStorage.getItem("Reload");
 
