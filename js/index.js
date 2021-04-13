@@ -69,11 +69,11 @@ document.querySelector("#initial").addEventListener('click', function time() {
       var hours = hrs, minutes = min, seconds = sec;
       while (seconds >= 60) {
         seconds -= 60;
-        minutes += 1;
+        minutes++;
       };
       while (minutes >= 60) {
         minutes -= 60;
-        hours += 1;
+        hours++;
       };
       hrs = hours;
       min = minutes;
