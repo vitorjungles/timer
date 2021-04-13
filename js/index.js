@@ -54,9 +54,9 @@ document.querySelector("#initial").addEventListener('click', function time() {
   document.querySelector("#initial").addEventListener("click", time);
 
   if ((hrs != '00' || min != '00' || sec != '00')) {
-    hrs = hrs == '' ? parseInt('00') : parseInt(hrs);
-    min = min == '' ? parseInt('00') : parseInt(min);
-    sec = sec == '' ? parseInt('00') : parseInt(sec);
+    hrs = hrs == '' ? + '00' : + hrs;
+    min = min == '' ? + '00' : + min;
+    sec = sec == '' ? + '00' : + sec;
 
     TimeSectionDiv.hidden = true;
 
