@@ -8,7 +8,9 @@ document.querySelector("#copyright").after(year);
 document.querySelector("footer").hidden = false;
 
 [0, 1, 2].forEach(element => {
-  document.querySelectorAll("input[name='data']")[element].oninput = (e) => { document.querySelectorAll("input[name='data']")[element].value = document.querySelectorAll("input[name='data']")[element].value.replace(/[^0-9]/g, '') } 
+  document.querySelectorAll("input[name='data']")[element].oninput = (e) => {
+    document.querySelectorAll("input[name='data']")[element].value = document.querySelectorAll("input[name='data']")[element].value.replace(/[^0-9]/g, '')
+  } 
 });
 
 function exchange(variable, text, color = 'black') {
@@ -25,7 +27,9 @@ function reset(div, counter, button, values = false) {
   button.value = 'Start';
 
   if (values) {
-    [0, 1, 2].forEach(element => { document.querySelectorAll("input[name='data']")[element].value = '00' });
+    [0, 1, 2].forEach(element => {
+      document.querySelectorAll("input[name='data']")[element].value = '00'
+    });
   };
 
   playAudio();
@@ -48,7 +52,9 @@ if (reload) {
   document.querySelectorAll("input")[1].value = sessionStorage.getItem("originalTime").substring(5, 3);
   document.querySelectorAll("input")[2].value = sessionStorage.getItem("originalTime").substring(8, 6);
 
-  ["originalTime", "reload"].forEach(element => { sessionStorage.removeItem(element) });
+  ["originalTime", "reload"].forEach(element => {
+    sessionStorage.removeItem(element)
+  });
 };
 
 document.querySelector("#initial").addEventListener('click', function time() {
@@ -116,10 +122,12 @@ document.querySelector("#initial").addEventListener('click', function time() {
 
     function Timer(callback, delay) {
       let timerId, start, remaining = delay;
+
       this.pause = () => {
         clearTimeout(timerId);
         remaining -= new Date() - start;
       };
+
       let resume = () => {
         start = new Date();
         timerId = setTimeout(() => {
@@ -128,7 +136,9 @@ document.querySelector("#initial").addEventListener('click', function time() {
           callback(timerId);
         }, remaining);
       };
+
       this.resume = resume;
+
       this.clear = () => {
         clearTimeout(timerId)
       };
@@ -152,7 +162,6 @@ document.querySelector("#initial").addEventListener('click', function time() {
 
         if (total == 0) {
           reset(timeSectionDiv, count, button, false);
-          console.log(hrs, min, sec, total);
 
           button.removeEventListener('click', pause);
           button.addEventListener('click', time);
@@ -189,7 +198,6 @@ document.querySelector("#initial").addEventListener('click', function time() {
       }, { once: true });
     } else {
       reset(timeSectionDiv, count, button, true);
-      console.log(hrs, min, sec, total);
     };
   } else {
     exchange(document.querySelector("#alert"), 'Enter the desired time below, please:', 'red');
