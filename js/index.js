@@ -1,4 +1,5 @@
 let year = document.createElement("span");
+
 const reload = sessionStorage.getItem("reload");
 
 year.textContent = ` ${new Date().getFullYear()}`;
@@ -16,28 +17,37 @@ function exchange(variable, text, color = 'black') {
   return variable;
 };
 
-function reset(div, c, btn, h, m, s, t, values = false, sound = false) {
+function reset(div, counter, button, values = false) {
   div.hidden = false;
-  c.remove();
-  btn.value = 'Start';
+
+  counter.remove();
+
+  button.value = 'Start';
+
   if (values) {
     [0, 1, 2].forEach(element => { document.querySelectorAll("input[name='data']")[element].value = '00' });
   };
-  h = m = s = t = 0;
-  if (sound) {
-    let context = new AudioContext(), oscillator = context.createOscillator(), contextGain = context.createGain();
-    oscillator.type = 'square';
-    oscillator.connect(contextGain);
-    contextGain.connect(context.destination);
-    contextGain.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + 3);
-    oscillator.start(0);
-  };
+
+  playAudio();
+};
+
+function playAudio() {
+  let context = new AudioContext(), oscillator = context.createOscillator(), contextGain = context.createGain();
+
+  oscillator.type = 'square';
+  oscillator.connect(contextGain);
+
+  contextGain.connect(context.destination);
+  contextGain.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + 3);
+
+  oscillator.start(0);
 };
 
 if (reload) {
   document.querySelectorAll("input")[0].value = sessionStorage.getItem("originalTime").substring(2, 0);
   document.querySelectorAll("input")[1].value = sessionStorage.getItem("originalTime").substring(5, 3);
   document.querySelectorAll("input")[2].value = sessionStorage.getItem("originalTime").substring(8, 6);
+
   ["originalTime", "reload"].forEach(element => { sessionStorage.removeItem(element) });
 };
 
@@ -68,30 +78,39 @@ document.querySelector("#initial").addEventListener('click', function time() {
     const original = display();
 
     if ((sec >= 60) || (min >= 60)) {
-      let hours = hrs, minutes = min, seconds = sec;
-      while (seconds >= 60) {
-        seconds -= 60;
-        minutes++;
-      };
-      while (minutes >= 60) {
-        minutes -= 60;
-        hours++;
-      };
-      hrs = hours;
-      min = minutes;
-      sec = seconds;
+      timeCorrection();
     };
 
     count.textContent = display();
     timeSectionDiv.before(count);
 
+    function timeCorrection() {
+      let hours = hrs, minutes = min, seconds = sec;
+
+      while (seconds >= 60) {
+        seconds -= 60;
+        minutes++;
+      };
+
+      while (minutes >= 60) {
+        minutes -= 60;
+        hours++;
+      };
+
+      hrs = hours;
+      min = minutes;
+      sec = seconds;
+    };
+
     function display() {
       let result = (hrs + ':' + min + ':' + sec).split(':');
+
       for (let c = 0; c < 3; c++) {
         if (result[c].length < 2) {
           result[c] = '0' + result[c];
         };
       };
+
       return result.join(':');
     };
 
@@ -110,7 +129,9 @@ document.querySelector("#initial").addEventListener('click', function time() {
         }, remaining);
       };
       this.resume = resume;
-      this.clear = () => { clearTimeout(timerId) };
+      this.clear = () => {
+        clearTimeout(timerId)
+      };
     };
 
     if (total > 0) {
@@ -130,7 +151,8 @@ document.querySelector("#initial").addEventListener('click', function time() {
         count.textContent = display();
 
         if (total == 0) {
-          reset(timeSectionDiv, count, button, hrs, min, sec, total, false, true);
+          reset(timeSectionDiv, count, button, false);
+          console.log(hrs, min, sec, total);
 
           button.removeEventListener('click', pause);
           button.addEventListener('click', time);
@@ -166,7 +188,8 @@ document.querySelector("#initial").addEventListener('click', function time() {
         location.reload();
       }, { once: true });
     } else {
-      reset(timeSectionDiv, count, button, hrs, min, sec, total, true, true);
+      reset(timeSectionDiv, count, button, true);
+      console.log(hrs, min, sec, total);
     };
   } else {
     exchange(document.querySelector("#alert"), 'Enter the desired time below, please:', 'red');
