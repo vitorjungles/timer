@@ -15,23 +15,31 @@
     <h1>Timer</h1>
   </header>
   <main>
-    <section id="time-section">
-      <div>
-        <h2 id="alert">Enter the desired time below:</h2>
-        <div id="data-input">
-          <input id="hours" name="data" type="text" maxlength="2" value="00">
-          :
-          <input id="minutes" name="data" type="text" maxlength="2" value="00">
-          :
-          <input id="seconds" name="data" type="text"  maxlength="2" value="00">
+    <section id="time">
+      <div class="container">
+        <div class="user-input">
+          <h2 id="alert">Enter the desired time below:</h2>
+          <div class="data-input">
+            <input id="hours" name="data" type="text" maxlength="2" value="00">
+            :
+            <input id="minutes" name="data" type="text" maxlength="2" value="00">
+            :
+            <input id="seconds" name="data" type="text"  maxlength="2" value="00">
+          </div>
         </div>
       </div>
-      <input class="button" id="initial" type="button" value="Start">
-      <input class="button" id="reset" type="button" value="Reset">
+      <div class="buttons">
+        <input class="button" id="initial" type="button" value="Start">
+        <input class="button" id="reset" type="button" value="Reset">
+      </div>
     </section>
   </main>
   <footer hidden>
-    <span id="copyright">&copy;</span> - Made by <a href="https://github.com/vitorjungles">Vítor Jungles</a>
+    <div class="footer-container">
+      <p>
+        <span id="copyright">&copy;</span> - Made by <a href="https://github.com/vitorjungles">Vítor Jungles</a>
+      </p>
+    </div>
   </footer>
   <script src="js/index.js"></script>
 </body>
