@@ -1,35 +1,50 @@
 * {
   font-family: 'Poppins', sans-serif;
-  text-align: center;
 }
 
 body {
   min-width: 500px;
 }
 
-header {
-  font-size: 2.5rem;
-  margin-bottom: 12rem;
+header, #time, .user-input, .data-input, .footer-container {
+  display: flex;
+  justify-content: center;
 }
 
-#time-section h1 {
+header {
+  font-size: 2.5rem;
+  margin-bottom: 7rem;
+}
+
+#time {
+  flex-direction: column;
+  align-items: center;
+}
+
+#time h1 {
   font-size: 5rem;
 }
 
-#data-input {
-  margin: auto;
+.user-input {
+  flex-direction: column;
+  align-items: center;
+}
+
+.data-input {
+  align-items: center;
+  gap: 1rem;
   font-size: 4rem;
   border-radius: 2rem;
   border-style: solid;
   width: 25rem;
+  padding: 1rem 0;
 }
 
 #hours, #minutes, #seconds {
-  padding: 1rem 0;
   width: 5rem;
   font-size: 4rem;
   border-style: none;
-  cursor: text;
+  text-align: center;
 }
 
 #hours:focus, #minutes:focus, #seconds:focus, .button:focus {
@@ -47,19 +62,19 @@ header {
   color: white;
   padding: 2rem;
   font-size: 30px;
-  border: solid #0070F3;
+  border: none;
   box-shadow: 5px 5px 20px #2a8dff;
   cursor: pointer;
+  padding: 2.2rem;
 }
 
 .button:hover {
-  background: #0077ff;
-  border: solid #0077ff;
+  filter: brightness(1.1);
   box-shadow: 5px 5px 30px #2a8dff;
 }
 
 footer {
-  margin-top: 4rem;
+  margin-top: 3rem;
 }
 
 a {
@@ -77,24 +92,25 @@ a:hover, a:focus {
 
   header {
     font-size: 1.5rem;
-    margin-bottom: 5rem;
+    margin-bottom: 2rem;
   }
 
-  #time-section {
+  #time {
     font-size: 0.8rem;
   }
 
-  #time-section h1 {
+  #time h1 {
     font-size: 2rem;
   }
 
-  #data-input {
+  .data-input {
     font-size: 1.2rem;
     width: 19rem;
+    padding: 0.2rem 0;
+    gap: 0;
   }
 
   #hours, #minutes, #seconds {
-    padding: 0.2rem 0;
     font-size: 1.1rem;
   }
 
@@ -105,22 +121,20 @@ a:hover, a:focus {
   }
 
   footer {
-    margin-top: 3rem;
     font-size: 0.8rem;
   }
 }
 
 @media screen and (max-width: 280px) and (max-height: 660px) {
-  #time-section, #data-input, #hours, #minutes, #seconds {
+  #time, .data-input, #hours, #minutes, #seconds {
     font-size: 0.6rem;
   }
 
-  #data-input {
+  .data-input {
     width: 16rem;
   }
 
   #hours, #minutes, #seconds {
-    padding: 0.2rem 0;
     border-radius: 1rem;
   }
 
